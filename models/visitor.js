@@ -7,27 +7,39 @@ const tableOptions = {
   throughput: 'ON_DEMAND',
 };
 
-const addSchema = Joi.object({
-  firstName: Joi.string().required(),
-  lastName: Joi.string().required(),
-});
-
-const visitorsSchema = new dynamoose.Schema(
+const visitorSchema = new dynamoose.Schema(
   {
-    visitorID: String,
-    firstName: String,
-    lastName: String,
+    visitorID: {
+      type: String,
+      required: true,
+    },
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    owner: {
+      type: Object,
+    },
   },
   {
     timestamps: true,
   }
 );
 
+const addSchema = Joi.object({
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
+});
+
 const schemas = {
   addSchema,
 };
 
-const Visitor = dynamoose.model(tableName, visitorsSchema, tableOptions);
+const Visitor = dynamoose.model(tableName, visitorSchema, tableOptions);
 
 module.exports = {
   Visitor,

@@ -4,6 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const visitorsRouter = require('./routes/api/visitors');
+const usersRouter = require('./routes/api/users');
 
 const app = express();
 
@@ -13,7 +14,7 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 
-// app.use('/users', userRouter);
+app.use('/users', usersRouter);
 app.use('/api/visitors', visitorsRouter);
 
 app.use((req, res) => {
