@@ -6,7 +6,6 @@ const {
   AWS_ACCESS_KEY_ID,
   AWS_SECRET_ACCESS_KEY,
   REGION,
-  // ENDPOINT,
 } = process.env;
 
 const ddb = new dynamoose.aws.ddb.DynamoDB({
@@ -15,11 +14,10 @@ const ddb = new dynamoose.aws.ddb.DynamoDB({
     secretAccessKey: AWS_SECRET_ACCESS_KEY,
   },
   region: REGION,
-  // endpoint: ENDPOINT,
 });
 
 dynamoose.aws.ddb.set(ddb);
 
 app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

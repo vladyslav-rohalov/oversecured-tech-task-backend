@@ -21,8 +21,8 @@ const visitorSchema = new dynamoose.Schema(
       type: String,
       required: true,
     },
-    owner: {
-      type: Object,
+    ownerID: {
+      type: String,
     },
   },
   {

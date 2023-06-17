@@ -9,9 +9,11 @@ const { SECRET_KEY } = process.env;
 const register = async (req, res) => {
   const { email, password } = req.body;
   const isTwin = await User.scan('email').contains(email).exec();
+
   if (isTwin.count !== 0) {
     throw httpError(409, 'Email in use');
   }
+
   const hashPassword = await bcrypt.hash(password, 10);
   const user = new User({
     userID: uuidv4(),
@@ -20,7 +22,6 @@ const register = async (req, res) => {
     token: '',
   });
   await user.save();
-
   res.status(201).json({
     user: {
       email: user.email,
@@ -35,6 +36,7 @@ const login = async (req, res) => {
   if (!user) {
     throw httpError(401, 'Email or password is wrong');
   }
+
   const passwordCompare = await bcrypt.compare(password, user.password);
 
   if (!passwordCompare) {
@@ -65,7 +67,6 @@ const getCurrent = async (req, res) => {
 const logout = async (req, res) => {
   const { userID } = req.user;
   await User.update(userID, { token: '' });
-
   res.status(204).json();
 };
 
