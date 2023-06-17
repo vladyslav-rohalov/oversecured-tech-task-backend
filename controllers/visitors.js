@@ -3,7 +3,8 @@ const { v4: uuidv4 } = require('uuid');
 const { ctrlWrapper, httpError } = require('../helpers');
 
 const getAll = async (req, res) => {
-  console.log(req);
+  const { userID: owner } = req.user;
+  console.log(req.user);
   const result = await Visitor.scan().exec();
   res.json(result);
 };

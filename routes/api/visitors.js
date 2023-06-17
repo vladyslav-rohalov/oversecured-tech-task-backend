@@ -2,16 +2,21 @@ const express = require('express');
 const ctrl = require('../../controllers/visitors');
 const router = express.Router();
 const { schemas } = require('../../models/visitor');
-const validateBody = require('../../midlewares/validateBody');
+const { validateBody, authorization } = require('../../midlewares/index');
 
-router.get('/', ctrl.getAll);
+router.get('/', authorization, ctrl.getAll);
 
-router.get('/:id', ctrl.getById);
+router.get('/:id', authorization, ctrl.getById);
 
-router.post('/', validateBody(schemas.addSchema), ctrl.add);
+router.post('/', authorization, validateBody(schemas.addSchema), ctrl.add);
 
-router.put('/:id', validateBody(schemas.addSchema), ctrl.updateById);
+router.put(
+  '/:id',
+  authorization,
+  validateBody(schemas.addSchema),
+  ctrl.updateById
+);
 
-router.delete('/:id', ctrl.deleteById);
+router.delete('/:id', authorization, ctrl.deleteById);
 
 module.exports = router;
