@@ -1,7 +1,8 @@
 const dynamoose = require('dynamoose');
 const Joi = require('joi');
 
-const tableName = 'Users';
+// const tableName = 'Users';
+const USERS_TABLE = process.env.USERS_TABLE;
 
 const tableOptions = {
   throughput: 'ON_DEMAND',
@@ -42,7 +43,7 @@ const schemas = {
   authSchema,
 };
 
-const User = dynamoose.model(tableName, userSchema, tableOptions);
+const User = dynamoose.model(USERS_TABLE, userSchema, tableOptions);
 
 module.exports = {
   User,

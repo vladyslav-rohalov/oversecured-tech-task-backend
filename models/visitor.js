@@ -1,7 +1,8 @@
 const dynamoose = require('dynamoose');
 const Joi = require('joi');
 
-const tableName = 'Visitors';
+// const tableName = 'Visitors';
+const VISITORS_TABLE = process.env.VISITORS_TABLE;
 
 const tableOptions = {
   throughput: 'ON_DEMAND',
@@ -39,7 +40,7 @@ const schemas = {
   addSchema,
 };
 
-const Visitor = dynamoose.model(tableName, visitorSchema, tableOptions);
+const Visitor = dynamoose.model(VISITORS_TABLE, visitorSchema, tableOptions);
 
 module.exports = {
   Visitor,
