@@ -14,7 +14,6 @@
     <li>
         <span><a href="https://www.serverless.com/" target="_blank" rel="noreferrer">Serverless</a>, this framework used to create lambda functions on AWS </span>
     </li>
-  
     <li>
         <span><a href="https://aws.amazon.com/ru/dynamodb/" target="_blank" rel="noreferrer">DynamoDB</a>, to store data. </span>
     </li>
